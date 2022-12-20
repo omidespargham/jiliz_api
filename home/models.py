@@ -1,3 +1,7 @@
 from django.db import models
 
-# Create your models here.
+
+class SliderHome(models.Model):
+    image0 = models.ImageField()
+    image1 = models.ImageField()
+    image2 = models.ImageField()

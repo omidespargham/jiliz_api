@@ -36,7 +36,7 @@ class Advert(models.Model):
     image4 = models.ImageField(blank=True, null=True, upload_to='adverts_images/', default='defaults/default-thumbnail.jpg')
     image5 = models.ImageField(blank=True, null=True, upload_to='adverts_images/', default='defaults/default-thumbnail.jpg')
     addres = models.TextField(blank=False, null=False)
-
+    created_obj = models.DateTimeField(auto_now_add=True, editable=False)
     
     class Advertstatus(models.TextChoices):
         New = 'new', 'نو'

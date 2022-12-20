@@ -5,6 +5,8 @@ from rest_framework.views import APIView
 from .models import (
     Advert,
     Category,
+    City,
+
 
 )
 from django.db.models import Q
@@ -16,6 +18,7 @@ from .serializers import (
 )
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
+
 
 class ShowAdvertApiView(APIView):
     def get(self, request, slug):
@@ -35,5 +38,5 @@ class MakeAdverb(APIView):
 
             return Response({'ok', 'ok'})
 
-
         return Response({'error': serializer.errors})
+

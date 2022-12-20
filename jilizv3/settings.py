@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Internal
+    'home.apps.HomeConfig',
     'advert.apps.AdvertConfig',
     'users.apps.UsersConfig',
     'blogs.apps.BlogsConfig',

@@ -31,5 +31,6 @@ class MakeAdvertSerializer(serializers.ModelSerializer):
     #
     # def create(self, validated_data):
     #     return models.Advert.objects.create(**validated_data)
-
+class HomePageSearchSerializer(serializers.Serializer):
+    pass
 
