@@ -5,6 +5,8 @@ from rest_framework.views import APIView
 from .models import (
     Advert,
     Category,
+    Brand,
+    Country,
     City,
 
 
@@ -35,8 +37,11 @@ class MakeAdverb(APIView):
         serializer = MakeAdvertSerializer(data=request.POST)
 
         if serializer.is_valid():
+            serializer.save(category=serializer.validated_data['category'], city=serializer.validated_data['city'], brand=serializer.validated_data['brand'], country=serializer.validated_data['country'])
+            return Response({'ok', 'Dreams for ever'})
 
-            return Response({'ok', 'ok'})
+
+        return Response({'error': serializer.errors})
 
         return Response({'error': serializer.errors})
 
