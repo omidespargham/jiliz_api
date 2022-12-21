@@ -40,8 +40,9 @@ INSTALLED_APPS = [
 
     # Internal
     'advert.apps.AdvertConfig',
-    'users.apps.UsersConfig',
     'blogs.apps.BlogsConfig',
+    'users.apps.UsersConfig',
+
 
 
     # External
@@ -140,6 +141,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 
 
+AUTH_USER_MODEL = 'users.User'
 
 
 # Rest
