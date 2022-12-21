@@ -6,7 +6,8 @@ from .models import (
     Advert,
     Category,
     Brand,
-    Country
+    Country,
+    City,
 
 
 )
@@ -19,6 +20,7 @@ from .serializers import (
 )
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
+
 
 class ShowAdvertApiView(APIView):
     def get(self, request, slug):
@@ -41,4 +43,5 @@ class MakeAdverb(APIView):
 
         return Response({'error': serializer.errors})
 
+        return Response({'error': serializer.errors})
 
