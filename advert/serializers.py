@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from . import models
 from django.shortcuts import get_object_or_404
-
+from .models import Category
 
 class ShowAdvertSerializer(serializers.ModelSerializer):
     category = serializers.CharField(source='category.name')
@@ -56,7 +56,16 @@ class MakeAdvertSerializer(serializers.ModelSerializer):
 class HomePageSearchSerializer(serializers.Serializer):
     pass
 
+class CategorySerializer(serializers.ModelSerializer):
+    parent = serializers.StringRelatedField()
 
-
+    class Meta:
+        model = Category
+        fields = ("parent","id","name")
     # def perform_create(self, serz):
     #     serz.save(user=self.request.user, category=serz['category'], city='asa', )
+
+
+
+class MultiSearchSerializers(serializers.Serializer):
+    city = serializers.CharField(required=False)

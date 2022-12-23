@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-mk*a0%x2_zz@l(r1!klgd$g#n(um3e5-qbbgpysc*#k$&uwypy
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -55,6 +55,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -152,3 +153,26 @@ AUTH_USER_MODEL = 'users.User'
 #         'rest_framework_simplejwt.authentication.JWTAuthentication',
 #     ],
 # }
+
+
+
+
+# For all request
+# CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ALLOW_CREDENTIALS = True
+#
+#
+
+
+# For filter the request
+
+# CORS_ORIGIN_ALLOW_ALL = False
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema'
+}
+
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+]

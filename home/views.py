@@ -40,6 +40,8 @@ class HomePageDataView(APIView):
                     'name': item.title,
                     'image': item.image0.url,
                     'price': item.price,
+                    'category': item.category.name,
+                    'slug': item.slug
 
                 }
                 data2.append(data3)
@@ -51,3 +53,49 @@ class HomePageDataView(APIView):
             product.append(data)
 
         return Response({'products': product})
+
+
+
+class HomePageAllCategoriesView(APIView):
+    def get(self, request, num_post):
+        visble = 25
+        upper = num_post
+        lower = upper - visble
+
+        load_averts = Advert.objects.filter().order_by('-created_obj')
+        lst_adverts = []
+        for item in load_averts:
+            data = {
+                'title': item.title,
+                'price': item.price,
+                'image': item.image0.url,
+                'category': item.category.name,
+                'slug': item.slug
+
+            }
+            lst_adverts.append(data)
+
+        return Response({'data': lst_adverts[lower:upper]})
+
+
+class HomePageCategoryDataView(APIView):
+    def get(self, request, num_post, category):
+        visble = 25
+        upper = num_post
+        lower = upper - visble
+        get_category = Category.objects.get(name=category)
+        load_averts = Advert.objects.filter(category=get_category).order_by('-created_obj')
+        lst_adverts = []
+        for item in load_averts:
+            data = {
+                'title': item.title,
+                'price': item.price,
+                'image': item.image0.url,
+                'category': item.category.name,
+                'slug': item.slug
+            }
+            lst_adverts.append(data)
+
+        return Response({'data': lst_adverts[lower:upper]})
+
+
