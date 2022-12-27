@@ -44,8 +44,6 @@ class MakeAdverb(APIView):
 
         return Response({'error': serializer.errors})
 
-        return Response({'error': serializer.errors})
-
 
 class SearchDataView(APIView):
     def get(self, request):

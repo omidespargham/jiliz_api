@@ -18,7 +18,7 @@ USER = get_user_model()
 
 class Advert(models.Model):
     user = models.ForeignKey(USER, on_delete=models.CASCADE, null=True, blank=True)
-    category = TreeForeignKey('Category', on_delete=models.CASCADE, null=True, blank=True)
+    category = TreeForeignKey('Category', on_delete=models.CASCADE, null=True, blank=True,related_name="adverts")
     title = models.CharField(max_length=50)
     description = models.TextField()
     price = models.CharField(max_length=100)
