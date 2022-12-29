@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from . import models
 from django.shortcuts import get_object_or_404
-from .models import Category,Advert
+from .models import Category,Advert,City
 
 class ShowAdvertSerializer(serializers.ModelSerializer):
     category = serializers.CharField(source='category.name')
@@ -89,3 +89,13 @@ class HomeCategorySerializer(serializers.ModelSerializer):
         adverts = obj.adverts.filter().order_by("-created_obj")
         adverts_srz = GetAdvertSerialiser(instance=adverts,many=True).data
         return adverts_srz
+
+class CitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model=City
+        fields =("name_city",)
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Category
+        fields=("name",)
