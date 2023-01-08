@@ -6,7 +6,7 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from abc import abstractmethod
 import uuid
-from mptt.models import MPTTModel, TreeForeignKey
+from mptt.models import MPTTModel, TreeForeignKey,TreeManyToManyField
 
 
 

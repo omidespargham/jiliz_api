@@ -29,10 +29,8 @@ class DetailCategoryView(APIView):
         srz_data = CategorySerializer(instance=category.get_children(), many=True)
         return Response(data={'products': srz_data.data})
 
-
-
 # in view baraye return subcategory hay ya zir grouh haye category khadamati ast.
-class DetailSubCategoryView(APIView):
+class DetailSubCategoryKhadamatiView(APIView):
     def get(self, request, category):
         category = get_object_or_404(Category, name=category)
         categories = CategorySerializer(instance=category.get_children(),many=True).data
@@ -41,6 +39,8 @@ class DetailSubCategoryView(APIView):
         else:
             data = {'products': categories}
         return Response(data=data)
+
+
 
 class MakeAdverb(APIView):
     permission_classes = [IsAuthenticated]
@@ -59,17 +59,12 @@ class MakeAdverb(APIView):
 
 # should be check 
 
-
-
-
 class ShowAdvertApiView(APIView):
     def get(self, request, slug):
         get_object_or_404(Advert, slug=slug)
         obj = Advert.objects.get(slug=slug)
         serializer = ShowAdvertSerializer(instance=obj)
         return Response({'obj': serializer.data})
-
-
 
 
 class SearchDataView(APIView):
@@ -100,3 +95,5 @@ class MultiSearchView(APIView):
         #     Out[4]: < QuerySet[ < Advert: This is Title >] >
 
             return Response({'ok': 'check the console'})
+
+

@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'advert.apps.AdvertConfig',
     'blogs.apps.BlogsConfig',
     'users.apps.UsersConfig',
-    
+    'testt.apps.TesttConfig'
 
 
     # External
