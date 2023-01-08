@@ -23,6 +23,7 @@ urlpatterns = [
     path('advert/', include('advert.urls')),
     path('users/', include('users.urls_v1')),
     path('', include('home.urls')),
+    path('testt/', include('testt.urls')),
     
 
 ]
