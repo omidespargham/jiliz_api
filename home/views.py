@@ -89,24 +89,36 @@ class HomePageAllCategoriesView(APIView):
         return Response({'data': lst_adverts[lower:upper]})
 
 
+# class HomePageCategoryDataView(APIView):
+#     def get(self, request, num_post, category):
+#         visble = 25
+#         upper = num_post
+#         lower = upper - visble
+#         get_category = Category.objects.get(name=category)
+#         load_averts = Advert.objects.filter(category=get_category).order_by('-created_obj')
+#         lst_adverts = []
+#         for item in load_averts:
+#             data = {
+#                 'title': item.title,
+#                 'price': item.price,
+#                 'image': item.image0.url,
+#                 'category': item.category.name,
+#                 'slug': item.slug
+#             }
+#             lst_adverts.append(data)
+
+#         return Response({'data': lst_adverts[lower:upper]})
+
+
 class HomePageCategoryDataView(APIView):
-    def get(self, request, num_post, category):
-        visble = 25
+    def get(self, request, num_post, category_id):
+        visble = 5
         upper = num_post
         lower = upper - visble
-        get_category = Category.objects.get(name=category)
-        load_averts = Advert.objects.filter(category=get_category).order_by('-created_obj')
-        lst_adverts = []
-        for item in load_averts:
-            data = {
-                'title': item.title,
-                'price': item.price,
-                'image': item.image0.url,
-                'category': item.category.name,
-                'slug': item.slug
-            }
-            lst_adverts.append(data)
+        get_category = Category.objects.get(id=category_id)
+        load_adverts = Advert.objects.filter(category=get_category).order_by('-created_obj')[:upper]
+        adverts_srz = GetAdvertSerialiser(load_adverts,many=True).data
 
-        return Response({'data': lst_adverts[lower:upper]})
+        return Response(adverts_srz)
 
 

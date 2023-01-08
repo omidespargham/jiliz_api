@@ -86,7 +86,7 @@ class HomeCategorySerializer(serializers.ModelSerializer):
         fields = ("parent","id","name","adverts")
 
     def get_adverts(self,obj):
-        adverts = obj.adverts.filter().order_by("-created_obj")
+        adverts = obj.adverts.filter().order_by("-created_obj")[:10]
         adverts_srz = GetAdvertSerialiser(instance=adverts,many=True).data
         return adverts_srz
 
