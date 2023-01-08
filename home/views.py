@@ -116,7 +116,7 @@ class HomePageCategoryDataView(APIView):
         upper = num_post
         lower = upper - visble
         get_category = Category.objects.get(id=category_id)
-        load_adverts = Advert.objects.filter(category=get_category).order_by('-created_obj')[lower:upper]
+        load_adverts = Advert.objects.filter(category=get_category).order_by('-created_obj')[:upper]
         adverts_srz = GetAdvertSerialiser(load_adverts,many=True).data
 
         return Response(adverts_srz)
