@@ -74,6 +74,12 @@ class MultiSearchSerializers(serializers.Serializer):
 
 # omid serializers 
 class GetAdvertSerialiser(serializers.ModelSerializer):
+    image0 = serializers.SerializerMethodField()
+
+    def get_image0(self, obj):
+        if obj.image0:
+            return str(self.context.get('host')) +  obj.image0.url
+
     class Meta:
         model = Advert
         fields = ("id","title","description","image0")
@@ -86,8 +92,9 @@ class HomeCategorySerializer(serializers.ModelSerializer):
         fields = ("parent","id","name","adverts")
 
     def get_adverts(self,obj):
+        data = self.context.get('host')
         adverts = obj.adverts.filter().order_by("-created_obj")[:10]
-        adverts_srz = GetAdvertSerialiser(instance=adverts,many=True).data
+        adverts_srz = GetAdvertSerialiser(instance=adverts, many=True, context={'host': data}).data
         return adverts_srz
 
 class CitySerializer(serializers.ModelSerializer):

@@ -33,7 +33,7 @@ class HomePageSearchView(APIView):
 class HomePageDataView(APIView):
     def get(self, request):
         categorys = Category.objects.filter(parent__isnull=True)
-        category_srz = HomeCategorySerializer(instance=categorys,many=True)
+        category_srz = HomeCategorySerializer(instance=categorys,many=True, context={'host': request.META['HTTP_HOST']})
         return Response(data=category_srz.data)
 
 class HomePageCategoryDataView(APIView):
