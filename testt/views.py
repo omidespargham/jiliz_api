@@ -15,7 +15,8 @@ class returnthestudentview(APIView):
         stu_data = studentserializer(data=request.data)
         if stu_data.is_valid():
             valided = stu_data.validated_data
-            student.objects.create(name=valided["name"],teacher=valided['teacher'])
+            obj = student.objects.create(name=valided["name"])
+            obj.teacher.set(valided['teacher'])
             return Response(data=stu_data.data)
         return Response(data=stu_data.errors)
 

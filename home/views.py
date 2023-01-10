@@ -19,23 +19,17 @@ class HomePageSearchView(APIView):
 
         return Response({'cities': cities, 'categories': categories})
 
-# class HomePageAllCategoriesView(APIView):
 
-#     def get(self, request, num_post):
-#         visble = 25
-#         upper = num_post
-#         lower = upper - visble
 
-#         load_averts = Advert.objects.filter().order_by('-created_obj')
-#         adverts_srz = GetAdvertSerialiser(load_adverts,many=True).data
-#         return Response(adverts_srz)
-
+# this is for 4 adverts with category view
 class HomePageDataView(APIView):
     def get(self, request):
         categorys = Category.objects.filter(parent__isnull=True)
         category_srz = HomeCategorySerializer(instance=categorys,many=True, context={'host': request.META['HTTP_HOST']})
         return Response(data=category_srz.data)
 
+
+# return adverts with category 5
 class HomePageCategoryDataView(APIView):
     def get(self, request, num_post, category_id):
         visble = 5

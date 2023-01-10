@@ -51,7 +51,11 @@ class MakeAdvertSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return models.Advert.objects.create(**validated_data)
-
+class MakeAdvertSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = "__all__"
+        exclude = ["user","phone_number","slug","publish","created_obj"
+                   ]
 
 class HomePageSearchSerializer(serializers.Serializer):
     pass
@@ -84,6 +88,8 @@ class GetAdvertSerialiser(serializers.ModelSerializer):
         model = Advert
         fields = ("id","title","description","image0")
 
+
+# this is for 4 adverts with category view
 class HomeCategorySerializer(serializers.ModelSerializer):
     adverts = serializers.SerializerMethodField()
 
