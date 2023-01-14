@@ -17,33 +17,32 @@ USER = get_user_model()
 
 
 class Advert(models.Model):
-    user = models.ForeignKey(USER, on_delete=models.CASCADE, null=True, blank=True)
-    category = TreeForeignKey('Category', on_delete=models.CASCADE, null=True, blank=True,related_name="adverts")
-    title = models.CharField(max_length=50)
-    description = models.TextField()
+    user = models.ForeignKey(USER, on_delete=models.SET_NULL, null=True, blank=True) # we will set
+    categorys = TreeManyToManyField('Category',related_name="adverts")# required
+    title = models.CharField(max_length=50) # required
+    description = models.TextField() # required
     price = models.CharField(max_length=100,null=True,blank=True)
-    agreement_price = models.BooleanField(default=False)
-    phone_number = models.CharField(max_length=12)
-    city = models.ForeignKey('City', on_delete=models.CASCADE)
+    agreement_price = models.BooleanField() # tavafoghi(True) gheymat(False) # required
+    phone_number = models.CharField(max_length=12) # we will set
+    city = models.ForeignKey('City', on_delete=models.SET_NULL,null=True,blank=True) # required
     # expired
-    publish = models.BooleanField(default=False, verbose_name='وعضیت آگهی')
-    slug = models.SlugField(blank=True, null=True, unique=True, editable=False)
-    brand = models.ForeignKey('Brand', to_field='name', blank=True, null=True, on_delete=models.CASCADE, default='نامعلوم')
-    country = models.ForeignKey('Country', to_field='name',blank=True, null=True, on_delete=models.CASCADE, default='نامعلوم')
-    image0 = models.ImageField(blank=True, null=True, upload_to='adverts_images/', default='defaults/default-thumbnail.jpg')
+    publish = models.BooleanField(default=False, verbose_name=' نمایش آگهی') # we will set
+    slug = models.SlugField(blank=True, null=True, unique=True, editable=False) # we will set
+    brand = models.ForeignKey('Brand', blank=True, null=True, on_delete=models.SET_NULL)
+    image0 = models.ImageField(blank=True, null=True, upload_to='adverts_images/', default='defaults/default-thumbnail.jpg') # required
     image1 = models.ImageField(blank=True, null=True, upload_to='adverts_images/', default='defaults/default-thumbnail.jpg')
     image2 = models.ImageField(blank=True, null=True, upload_to='adverts_images/', default='defaults/default-thumbnail.jpg')
     image3 = models.ImageField(blank=True, null=True, upload_to='adverts_images/', default='defaults/default-thumbnail.jpg')
     image4 = models.ImageField(blank=True, null=True, upload_to='adverts_images/', default='defaults/default-thumbnail.jpg')
     image5 = models.ImageField(blank=True, null=True, upload_to='adverts_images/', default='defaults/default-thumbnail.jpg')
-    addres = models.TextField(blank=False, null=False)
-    created_obj = models.DateTimeField(auto_now_add=True, editable=False)
-    
+    address = models.TextField(blank=False, null=False) # required
+    created_obj = models.DateTimeField(auto_now_add=True, editable=False) # we will set
+    country_made_by = models.ForeignKey('Country',on_delete=models.CASCADE,null=True,blank=True)
     class Advertstatus(models.TextChoices):
-        New = 'new', 'نو'
-        Worked = 'worked', 'کارکرده'
+        New = 'نو', 'نو'
+        Worked = 'کارکرده', 'کارکرده'
 
-    status_type = models.CharField(max_length=30, choices=Advertstatus.choices, blank=False, null=False)
+    status_type = models.CharField(max_length=30, choices=Advertstatus.choices, blank=False, null=False) # required
 
     def __str__(self):
         return str(self.title)
@@ -58,7 +57,6 @@ class Advert(models.Model):
 
 class City(models.Model):
     name_city = models.CharField(_('name city'), max_length=80, unique=True)
-    state = models.CharField(_('state'), max_length=80)
 
     def __str__(self):
         return str(self.name_city)
@@ -85,7 +83,7 @@ class Country(models.Model):
 
 
     def __str__(self):
-        return str(f'Country {self.name}')
+        return str(f'{self.name}')
 
 
 
@@ -93,4 +91,4 @@ class Brand(models.Model):
     name = models.CharField(max_length=30, unique=True)
 
     def __str__(self):
-        return str(f'Brand {self.name}')
+        return str(f' {self.name}')

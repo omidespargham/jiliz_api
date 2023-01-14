@@ -4,7 +4,7 @@ from . import views
 app_name = 'Advertsv1'
 
 urlpatterns = [
-    path('make-adverb/', views.MakeAdverb.as_view(), name='MakeAdverb'),
+    path('make-advert/', views.MakeAdverb.as_view(), name='MakeAdverb'),
     path('search-data-bas/', views.SearchDataView.as_view(), name='SearchBaseView'),
     path('search-in-categorys/<str:category>/', views.DetailCategoryView.as_view()),
     path('search-in-khadamati/<str:category>/', views.DetailSubCategoryKhadamatiView.as_view(), name='ShowAdverts'),
