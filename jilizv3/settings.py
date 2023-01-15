@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'blogs.apps.BlogsConfig',
     'users.apps.UsersConfig',
     'testt.apps.TesttConfig',
-
+    'other_adverts.apps.OtherAdvertsConfig',
+    
 
     # External
     'rest_framework',
