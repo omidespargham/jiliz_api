@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+
+    "SetupMenudesignConfig",
     # Internal
     'home.apps.HomeConfig',
     'advert.apps.AdvertConfig',
