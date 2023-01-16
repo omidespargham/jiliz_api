@@ -5,11 +5,12 @@ from mptt.models import TreeForeignKey
 User = get_user_model()
 
 
-class Service(models.Model):
+class InstallAndRepairExpertiseArea(models.Model): # خدمات/حوزه تخصصی
     name = models.CharField(max_length=40)
 
     def __str__(self):
         return f"{self.name}"
+
 EDUCATION_CHOICES = ( # تحصیلات
     ("", ""),
     ("زیر دیپلم", "زیر دیپلم"),
@@ -25,7 +26,7 @@ class InstallRepairAdvert(models.Model):
     category = TreeForeignKey(Category,on_delete=models.SET_NULL,null=True,blank=True)
     title = models.CharField(max_length=150)
     slug = models.SlugField()
-    Services = models.ForeignKey(Service,on_delete=models.SET_NULL,null=True,blank=True) # خدمات
+    expertise_area = models.ForeignKey(InstallAndRepairExpertiseArea,on_delete=models.SET_NULL,null=True,blank=True) # خدمات(حوزه تخصصی)
     have_guarantee = models.BooleanField(default=False)
     description = models.TextField()
     education = models.CharField(max_length=30,choices=EDUCATION_CHOICES,default="") # تحصیلات
@@ -64,6 +65,7 @@ class InstallRepairAdvert(models.Model):
 SETUP_MENUDESIGN_EXPERTISE_CHOISES = (
     ("طراحی منوی", "طراحی منوی"),
     ("راه اندازی", "راه اندازی"),
+    ("طراحی منوی و راه اندازی", "طراحی منوی و راه اندازی"),
     # ("طراحی منو و راه اندازی رستوران", "طراحی منو و راه اندازی رستوران"),
     # ("طراحی منوی کافی شاپ", "طراحی منوی کافی شاپ"),
     # ("راه اندازی کافی شاپ", "راه اندازی کافی شاپ"),
@@ -71,7 +73,7 @@ SETUP_MENUDESIGN_EXPERTISE_CHOISES = (
 )
 
 
-class SetupMenuExpertiseArea(models.Model):
+class SetupAndMenuExpertiseArea(models.Model):
     name = models.CharField(max_length=255)
 
 
@@ -80,11 +82,11 @@ class SetupMenuDesign(models.Model):
     title = models.CharField(max_length=80)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
     city = models.ForeignKey(City, on_delete=models.SET_NULL, null=True, blank=True)
-    expertise_area = models.ForeignKey(SetupMenuExpertiseArea, on_delete=models.SET_NULL, null=True, blank=True) # حوزه تخصص
+    expertise_area = models.ForeignKey(SetupAndMenuExpertiseArea, on_delete=models.SET_NULL, null=True, blank=True) # حوزه تخصص
     expertise = models.CharField(max_length=50, choices=SETUP_MENUDESIGN_EXPERTISE_CHOISES) # تخصص
     have_guarantee = models.BooleanField()
     description = models.TextField()
-
+    education = models.CharField(max_length=30,choices=EDUCATION_CHOICES,default="") # تحصیلات
     class ContractType(models.TextChoices): # نوع قرارداد
         mahzari = 'رسمی / محضری', 'رسمی / محضری'
         agreement = 'غیر رسمی / توافقی', 'غیر رسمی / توافقی'
@@ -98,10 +100,18 @@ class SetupMenuDesign(models.Model):
 
     activity_type = models.CharField(max_length=30, choices=ActivityType.choices, blank=False, null=False)
 
+    class UserExperience(models.TextChoices): # سابقه فعالیت
+        under_one = 'زیر یکسال', 'زیر یکسال'
+        oneـto_three_years = 'یک الی سه سال', 'یک الی سه سال'
+        threeـto_five_years = 'سه الی پنج سال', 'سه الی پنج سال'
+        fiveـto_ten_years = 'پنج الی ده سال', 'پنج الی ده سال'
+
+    user_activity_experience = models.CharField(max_length=30, choices=UserExperience.choices, blank=False, null=False) # سابقه فعالیت
+
 
 # TODO
-# سابقه فعالیت
-# تحصیلات
+# سابقه فعالیت OK
+# تحصیلات ok
 # images
-# Create your models here.
+# Create your models here. OK
 
