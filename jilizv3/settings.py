@@ -44,8 +44,10 @@ INSTALLED_APPS = [
     'blogs.apps.BlogsConfig',
     'users.apps.UsersConfig',
     'testt.apps.TesttConfig',
-    'other_adverts.apps.OtherAdvertsConfig',
-    
+    "install_repair.apps.InstallRepairConfig",
+    "install_repair.apps.InstallRepairConfig",
+    "setup_design.apps.SetupDesignConfig",
+    "job.apps.JobConfig",
 
     # External
     'rest_framework',
