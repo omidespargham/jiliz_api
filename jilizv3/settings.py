@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'testt.apps.TesttConfig',
     "install_repair.apps.InstallRepairConfig",
-    "install_repair.apps.InstallRepairConfig",
     "setup_design.apps.SetupDesignConfig",
     "job.apps.JobConfig",
 

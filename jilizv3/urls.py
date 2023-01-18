@@ -24,7 +24,7 @@ urlpatterns = [
     path('users/', include('users.urls_v1')),
     path('', include('home.urls')),
     path('testt/', include('testt.urls')),
-    path('other_adverts/', include('other_adverts.urls',namespace="other_adverts")),
+    # path('other_adverts/', include('other_adverts.urls',namespace="other_adverts")),
     
 
 ]
