@@ -50,6 +50,7 @@ INSTALLED_APPS = [
 
     # External
     'rest_framework',
+    'rest_framework.authtoken',
     'mptt',
 
 
@@ -179,4 +180,4 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
 ]
 
-AUTH_USER_MODEL = "accounts.User"
+# AUTH_USER_MODEL = "accounts.User"
