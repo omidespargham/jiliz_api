@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'advert.apps.AdvertConfig',
     'blogs.apps.BlogsConfig',
-    'users.apps.UsersConfig',
+    # 'users.apps.UsersConfig',
     'testt.apps.TesttConfig',
     "install_repair.apps.InstallRepairConfig",
     "setup_design.apps.SetupDesignConfig",
@@ -144,22 +144,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-
-
-AUTH_USER_MODEL = 'users.User'
-
-
-# Rest
-# REST_FRAMEWORK = {
-#
-#     'DEFAULT_AUTHENTICATION_CLASSES': [
-#         'rest_framework_simplejwt.authentication.JWTAuthentication',
-#     ],
-# }
-
-
-
-
 # For all request
 # CORS_ORIGIN_ALLOW_ALL = True
 # CORS_ALLOW_CREDENTIALS = True
@@ -171,13 +155,21 @@ AUTH_USER_MODEL = 'users.User'
 
 # CORS_ORIGIN_ALLOW_ALL = False
 
-REST_FRAMEWORK = {
-    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema'
-}
+# REST_FRAMEWORK = {
+#     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema'
+# }
 
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
 ]
+
+# Rest
+REST_FRAMEWORK = {
+
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}
 
 # AUTH_USER_MODEL = "accounts.User"

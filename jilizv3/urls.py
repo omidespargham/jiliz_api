@@ -21,9 +21,10 @@ from jilizv3 import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('advert/', include('advert.urls')),
-    path('users/', include('users.urls_v1')),
+    # path('users/', include('users.urls_v1')),
     path('', include('home.urls')),
     path('testt/', include('testt.urls')),
+
     # path('other_adverts/', include('other_adverts.urls',namespace="other_adverts")),
     
 
