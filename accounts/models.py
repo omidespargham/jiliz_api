@@ -26,8 +26,8 @@ class User(AbstractBaseUser):
     def is_staff(self):
         return self.is_admin
         
-    @classmethod
-    def get_random_string(cls):
-        letters = string.ascii_letters
-        result_str = ''.join(random.choice(letters) for i in range(10))
-        return result_str
+    # @classmethod
+    # def get_random_string(cls):
+    #     letters = string.ascii_letters
+    #     result_str = ''.join(random.choice(letters) for i in range(10))
+    #     return result_str

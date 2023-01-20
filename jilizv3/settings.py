@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'advert.apps.AdvertConfig',
     'blogs.apps.BlogsConfig',
+    'accounts.apps.AccountsConfig',
     # 'users.apps.UsersConfig',
     'testt.apps.TesttConfig',
     "install_repair.apps.InstallRepairConfig",
@@ -171,4 +172,4 @@ REST_FRAMEWORK = {
     ],
 }
 
-# AUTH_USER_MODEL = "accounts.User"
+AUTH_USER_MODEL = "accounts.User"
