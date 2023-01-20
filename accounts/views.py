@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.response import Response
-from .serializers import UserSerialzier
+from .serializers import UserSerialzier,UserVerifySerializer
 from .models import User,RGScode
 from random import randint
 
@@ -21,7 +21,23 @@ class LoginView(APIView):
         return Response(data=srz_data.errors)
 
 class UserVerifyView(APIView):
-    pass
+    def post(self, request):
+        srz_data = UserVerifySerializer(request.data)
+        if srz_data.is_valid():
+            # code = form.cleaned_data["code"]
+            try:
+                user_info = request.session["user_info"]
+                user = User.objects.get(phone_number=user_info["phone_number"])
+
+            except User.DoesNotExist:
+                rand_password = User.get_random_string()
+                user = User.objects.create_user(
+                    phone_number=user_info["phone_number"], password=rand_password)
+            
+            tokens = user.get_tokens_for_user()
+            return Response(data=tokens)
+            
+        return Response(data=srz_data.errors)
 
 # TODO
 # validations needed for loginView serialzers

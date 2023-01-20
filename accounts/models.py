@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
-
+from rest_framework_simplejwt.tokens import RefreshToken
 from accounts.manager import UserManager
 import random
 import string
@@ -26,11 +26,19 @@ class User(AbstractBaseUser):
     def is_staff(self):
         return self.is_admin
         
-    # @classmethod
-    # def get_random_string(cls):
-    #     letters = string.ascii_letters
-    #     result_str = ''.join(random.choice(letters) for i in range(10))
-    #     return result_str
+    @classmethod
+    def get_random_string(cls):
+        letters = string.ascii_letters
+        result_str = ''.join(random.choice(letters) for i in range(10))
+        return result_str
+    
+    def get_tokens_for_user(self):
+        refresh = RefreshToken.for_user(self)
+
+        return {
+        'refresh': str(refresh),
+        'access': str(refresh.access_token),
+        }
 
 class RGScode(models.Model):
     phone_number = models.CharField(max_length=12,unique=True)
