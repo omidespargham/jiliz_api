@@ -8,7 +8,7 @@ from random import randint
 
 class LoginView(APIView):
     def post(self, request):
-        srz_data = UserSerialzier(request.POST)
+        srz_data = UserSerialzier(data=request.data)
         if srz_data.is_valid(): # shouldnt check the phone is unique
             the_code = randint(1, 9)
             RGScode.objects.create(
@@ -20,5 +20,9 @@ class LoginView(APIView):
             return Response(data=srz_data.data)
         return Response(data=srz_data.errors)
 
+class UserVerifyView(APIView):
+    pass
 
-# Create your views here.
+# TODO
+# validations needed for loginView serialzers
+
