@@ -17,6 +17,11 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from jilizv3 import settings
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,8 +29,8 @@ urlpatterns = [
     # path('users/', include('users.urls_v1')),
     path('', include('home.urls')),
     path('testt/', include('testt.urls')),
-
-    # path('other_adverts/', include('other_adverts.urls',namespace="other_adverts")),
+    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     
 
 ]
