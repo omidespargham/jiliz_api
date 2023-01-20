@@ -31,3 +31,7 @@ class User(AbstractBaseUser):
     #     letters = string.ascii_letters
     #     result_str = ''.join(random.choice(letters) for i in range(10))
     #     return result_str
+
+class RGScode(models.Model):
+    phone_number = models.CharField(max_length=12,unique=True)
+    code = models.PositiveIntegerField()

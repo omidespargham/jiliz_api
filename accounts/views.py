@@ -1,12 +1,14 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
+from .serializers import UserSerialzier
+from random import randint
 
 # class LoginView(APIView):
 
 #     def post(self, request):
-#         form = self.form_class(request.POST)
-#         if form.is_valid():
+#         srz_data = UserSerialzier(request.POST)
+#         if srz_data.is_valid():
 #             the_code = randint(1, 9)
 #             RGScode.objects.create(
 #                 phone_number=form.cleaned_data["phone_number"], code=the_code)
