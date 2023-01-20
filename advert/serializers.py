@@ -63,10 +63,10 @@ class MakeAdvertSerializer(serializers.ModelSerializer):
                 # "image0" : {"required": True},
                 }
     def create(self,validated_data):
-        categorys_to_set = validated_data.get("categorys")
+        categorys_id_to_set = validated_data.get("categorys")
         del validated_data["categorys"]
         advert = Advert.objects.create(**validated_data)
-        advert.categorys.set(categorys_to_set)
+        advert.categorys.set(categorys_id_to_set)
         return advert
 
 

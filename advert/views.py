@@ -43,17 +43,19 @@ class DetailSubCategoryKhadamatiView(APIView):
 
 
 class MakeAdverb(APIView):
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def post(self, request):
         serializer = MakeAdvertSerializer(data=request.data)
-    
+
         if serializer.is_valid():
             valided = serializer.validated_data
-            # valided["user"] = request.user
-            # valided["phone_number"] = request.user.phone_number
+            valided["user"] = request.user
+            # TODO 
+            # make the user and pass the phone_number to the advert data !
+            valided["phone_number"] = request.user.email
             serializer.create(valided)
-            return Response({'ok', 'Dreams for ever'})
+            return Response({'ok':'make it as avatar ;)'})
 
         return Response(data=serializer.errors)
 
@@ -99,3 +101,5 @@ class MultiSearchView(APIView):
             return Response({'ok': 'check the console'})
 
 
+# TODO
+# make the user and pass the phone_number to the advert data !
