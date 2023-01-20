@@ -53,7 +53,7 @@ class MakeAdverb(APIView):
             valided["user"] = request.user
             # TODO 
             # make the user and pass the phone_number to the advert data !
-            valided["phone_number"] = request.user.email
+            valided["phone_number"] = request.user.phone_number
             serializer.create(valided)
             return Response({'ok':'make it as avatar ;)'})
 

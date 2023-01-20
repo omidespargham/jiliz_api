@@ -22,7 +22,7 @@ class LoginView(APIView):
 
 class UserVerifyView(APIView):
     def post(self, request):
-        srz_data = UserVerifySerializer(request.data)
+        srz_data = UserVerifySerializer(data=request.data)
         if srz_data.is_valid():
             # code = form.cleaned_data["code"]
             try:

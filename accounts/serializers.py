@@ -8,12 +8,12 @@ class UserSerialzier(serializers.ModelSerializer):
         fields = ("phone_number",)
         
 
-# class UserVerifySerializer(serializers.Serializer):
-#     phone_number = serializers.CharField(required=True)
-#     code = serializers.IntegerField()
+class UserVerifySerializer(serializers.Serializer):
+    phone_number = serializers.CharField(required=True)
+    code = serializers.IntegerField()
 
-class UserVerifySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = RGScode
-        fields = "__all__"
+# class UserVerifySerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = RGScode
+#         fields = "__all__"
         
