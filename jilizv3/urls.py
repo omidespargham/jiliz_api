@@ -27,6 +27,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('advert/', include('advert.urls')),
     # path('users/', include('users.urls_v1')),
+    path("accounts/",include("accounts.urls",namespace="accounts")),
     path('', include('home.urls')),
     path('testt/', include('testt.urls')),
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
