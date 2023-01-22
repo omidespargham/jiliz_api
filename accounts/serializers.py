@@ -25,8 +25,15 @@ class UserVerifySerializer(serializers.Serializer):
     phone_number = serializers.CharField(required=True)
     code = serializers.IntegerField()
 
+    def validate_code(self,code):
+        try:
+            the_code = RGScode.objects.get(code=code)
+            the_code.delete()
+            return code
+        except RGScode.DoesNotExist:
+            raise serializers.ValidationError("کد نامعتبر است.")
 # class UserVerifySerializer(serializers.ModelSerializer):
 #     class Meta:
 #         model = RGScode
 #         fields = "__all__"
-        
+
