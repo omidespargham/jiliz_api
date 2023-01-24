@@ -40,14 +40,6 @@ class UserVerifySerializer(serializers.Serializer):
     def validate_phone_number(self, value):
         if value[0:2] != "09":
             raise serializers.ValidationError("تلفن باید با 09 شروع شود", code="required")
-        
-            # raise serializers.ValidationError([serializers.ValidationError(
-            #     "شماره تلفن نامعتبر است", code="invalid"), serializers.ValidationError("تلفن باید با 09 شروع شود", code="required")])
-        # try:
-        #     code = RGScode.objects.get(phone_number=value)
-        #     code.delete()
-        # except RGScode.DoesNotExist:
-        #     pass
         return value
 # class UserVerifySerializer(serializers.ModelSerializer):
 #     class Meta:

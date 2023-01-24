@@ -15,8 +15,6 @@ class LoginView(APIView):
                 phone_number=srz_data.validated_data["phone_number"], code=the_code)
             print(the_code)
             # if the session didnt work in DRF get the phone again in user verify view !
-            # request.session["user_info"] = {
-            #     "phone_number": srz_data.validated_data["phone_number"]}
             return Response(data=srz_data.data)
         return Response(data=srz_data.errors)
 
@@ -24,10 +22,8 @@ class UserVerifyView(APIView):
     def post(self, request):
         srz_data = UserVerifySerializer(data=request.data)
         if srz_data.is_valid():
-            # code = form.cleaned_data["code"]
             phone = srz_data.validated_data["phone_number"]
             try:
-                # user_info = request.session["user_info"]
                 user = User.objects.get(phone_number=phone)
 
             except User.DoesNotExist:
