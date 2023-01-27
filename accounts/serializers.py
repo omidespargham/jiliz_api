@@ -1,7 +1,7 @@
 # from rest_framework.serializers import ModelSerializer,Serializer
 from rest_framework import serializers
 from .models import User, RGScode
-
+from django.core.cache import cache
 
 # class UserSerialzier(serializers.ModelSerializer):
 #     class Meta:
@@ -26,21 +26,34 @@ class UserSerialzier(serializers.Serializer):
 
 
 class UserVerifySerializer(serializers.Serializer):
-    phone_number = serializers.CharField(required=True)
+    # phone_number = serializers.CharField(required=True)
     code = serializers.IntegerField()
 
     def validate_code(self,code):
-        try:
-            the_code = RGScode.objects.get(code=code)
-            the_code.delete()
-            return code
-        except RGScode.DoesNotExist:
+        phone = cache.get(code,None)
+        if len(str(code)) != 1:
             raise serializers.ValidationError("کد نامعتبر است.")
+        elif not phone:
+            raise serializers.ValidationError("کد وجود ندارد و یا منقضی شده")
+        cache.delete_pattern(code)
+        return phone
     
-    def validate_phone_number(self, value):
-        if value[0:2] != "09":
-            raise serializers.ValidationError("تلفن باید با 09 شروع شود", code="required")
-        return value
+        # try:
+        #     the_code = RGScode.objects.get(code=code)
+        #     the_code.delete()
+        #     return code
+        # except RGScode.DoesNotExist:
+        #     raise serializers.ValidationError("کد نامعتبر است.")
+    
+    
+    # def validate_phone_number(self, value):
+    #     if value[0:2] != "09":
+    #         raise serializers.ValidationError("تلفن باید با 09 شروع شود", code="required")
+    #     return value
+
+
+
+
 # class UserVerifySerializer(serializers.ModelSerializer):
 #     class Meta:
 #         model = RGScode
