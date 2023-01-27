@@ -9,7 +9,6 @@ from .models import (
     Brand,
     Country,
     City,
-
 )
 from django.db.models import Q
 from django.shortcuts import get_object_or_404

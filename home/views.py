@@ -9,6 +9,7 @@ from advert.models import (
     City,
     Advert
 )
+from django.core.cache import cache
 
 class HomePageSearchView(APIView):
     def get(self, request):
@@ -41,3 +42,14 @@ class HomePageCategoryDataView(APIView):
         return Response(adverts_srz)
 
 
+class SaveDataInCacheView(APIView):
+    def post(self,request,key,value):
+        # for key,value in request.data:
+        cache.set(key,value)
+
+        return Response(data={"OK":"make it as avatar !"})
+
+class GetDataFromCacheView(APIView):
+    def get(self,request,key):
+        result = cache.get(key,"null")
+        return Response(data={result:"you got the data !"})
