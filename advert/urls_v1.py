@@ -5,11 +5,8 @@ app_name = 'Advertsv1'
 
 urlpatterns = [
     path('make-advert/', views.MakeAdverb.as_view(), name='MakeAdverb'),
-    path('search-data-bas/', views.SearchDataView.as_view(), name='SearchBaseView'),
-    path('search-in-categorys/<str:category>/', views.DetailCategoryView.as_view()),
-    path('search-in-khadamati/<str:category>/', views.DetailSubCategoryKhadamatiView.as_view(), name='ShowAdverts'),
-    path('view-advert/<str:slug>/', views.ShowAdvertApiView.as_view(), name='ShowAdverts'),
-    path('multi-search/', views.MultiSearchView.as_view(), name='MultiSearchUrl'),
+    path('search-in-categorys/<str:category_name>/', views.CategoryChildsView.as_view()),
+    path('search-in-khadamati/<str:category_name>/', views.DetailSubCategoryKhadamatiView.as_view(), name='ShowAdverts'),
     
 
 
