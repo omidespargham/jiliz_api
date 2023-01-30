@@ -11,16 +11,6 @@ from advert.models import (
 )
 from django.core.cache import cache
 
-class HomePageSearchView(APIView):
-    def get(self, request):
-        load_all_cities = City.objects.all()
-        load_all_categories = Category.objects.filter(parent__isnull=True)
-        cities = CitySerializer(instance=load_all_cities,many=True).data
-        categories = CategorySerializer(instance=load_all_categories,many=True).data
-
-        return Response({'cities': cities, 'categories': categories})
-
-
 
 # this is for 4 adverts with category view
 class HomePageDataView(APIView):

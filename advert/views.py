@@ -28,7 +28,7 @@ class CategoryChildsView(APIView):
 
 
 # in view baraye return subcategory hay ya zir grouh haye category khadamati ast.
-class DetailSubCategoryKhadamatiView(APIView):
+class KhadamatiSubCategorysView(APIView):
     def get(self, request, category_id):
         category = get_object_or_404(Category, id=category_id)
         categories = CategorySerializer(instance=category.get_children(),many=True).data
@@ -40,7 +40,7 @@ class DetailSubCategoryKhadamatiView(APIView):
 
 
 
-class MakeAdverb(APIView):
+class MakeAdvert(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):

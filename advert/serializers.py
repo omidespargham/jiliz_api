@@ -71,11 +71,6 @@ class HomeCategorySerializer(serializers.ModelSerializer):
         return adverts_srz
 
 
-class CitySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = City
-        fields = ("name_city",)
-
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
