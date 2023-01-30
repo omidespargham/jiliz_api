@@ -13,3 +13,6 @@ class student(models.Model):
     def __str__(self):
         return f"{self.name}"
 
+class One(models.Model):
+    name = models.CharField(max_length=255,blank=True)
+    f = models.CharField(max_length=255,null=True)
