@@ -1,23 +1,14 @@
-import json
 from django.shortcuts import render
+from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import  CategorySerializer
-from .models import (
-    Advert,
-    Category,
-    Brand,
-    Country,
-    City,
-)
-from django.db.models import Q
-from django.shortcuts import get_object_or_404
-from .serializers import (
-    MakeAdvertSerializer,
-)
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
-
+from .models import Category
+from .serializers import (
+    MakeAdvertSerializer,
+    CategorySerializer
+)
 # in view baraye return subcategory haye yek category ast(garm,srd,...).
 class CategoryChildsView(APIView):
     def get(self, request, category_id):

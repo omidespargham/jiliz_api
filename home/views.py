@@ -1,12 +1,9 @@
-import json
-
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from advert.serializers import HomeCategorySerializer,GetAdvertSerialiser,CitySerializer,CategorySerializer
+from .serializers import HomeCategorySerializer,HomeGetAdvertSerialiser
 from advert.models import (
     Category,
-    City,
     Advert
 )
 from django.core.cache import cache
@@ -28,7 +25,7 @@ class HomePageCategoryDataView(APIView):
         lower = upper - visble
         get_category = Category.objects.get(id=category_id)
         load_adverts = Advert.objects.filter(categorys=get_category).order_by('-created_obj')[:upper]
-        adverts_srz = GetAdvertSerialiser(load_adverts,many=True).data
+        adverts_srz = HomeGetAdvertSerialiser(load_adverts,many=True).data
         return Response(adverts_srz)
 
 
