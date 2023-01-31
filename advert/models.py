@@ -68,7 +68,11 @@ class City(models.Model):
 class Category(MPTTModel):
     name = models.CharField(max_length=90)
     parent = TreeForeignKey('self', on_delete=models.CASCADE, blank=True, null=True, related_name='children')
-    
+    class Advertstatus(models.TextChoices):
+        good_category = "good_category", 'گروه کالایی'
+        service_category = 'service_category', 'گروه خدمات'
+
+    category_type = models.CharField(max_length=30, choices=Advertstatus.choices,default="good_category") # required
 
 
     class MPTTMeta:
