@@ -21,23 +21,23 @@ class Advert(models.Model):
     categorys = TreeManyToManyField('Category',related_name="adverts")# required
     title = models.CharField(max_length=50) # required
     description = models.TextField() # required
-    price = models.CharField(max_length=100,null=True,blank=True)
+    price = models.CharField(max_length=100,blank=True)
     agreement_price = models.BooleanField() # tavafoghi(True) gheymat(False) # required
     phone_number = models.CharField(max_length=12) # we will set
-    city = models.ForeignKey('City', on_delete=models.SET_NULL,null=True,blank=True) # required
+    city = models.ForeignKey('City', on_delete=models.SET_NULL,null=True) # required
     # expired
     publish = models.BooleanField(default=False, verbose_name=' نمایش آگهی') # we will set
-    slug = models.SlugField(blank=True, null=True, unique=True, editable=False) # we will set
-    brand = models.ForeignKey('Brand', blank=True, null=True, on_delete=models.SET_NULL)
+    slug = models.SlugField(unique=True, editable=False) # we will set
+    brand = models.ForeignKey('Brand', on_delete=models.SET_NULL,null=True)
     image0 = models.ImageField(blank=True, null=True, upload_to='adverts_images/', default='defaults/default-thumbnail.jpg') # required
     image1 = models.ImageField(blank=True, null=True, upload_to='adverts_images/', default='defaults/default-thumbnail.jpg')
     image2 = models.ImageField(blank=True, null=True, upload_to='adverts_images/', default='defaults/default-thumbnail.jpg')
     image3 = models.ImageField(blank=True, null=True, upload_to='adverts_images/', default='defaults/default-thumbnail.jpg')
     image4 = models.ImageField(blank=True, null=True, upload_to='adverts_images/', default='defaults/default-thumbnail.jpg')
     image5 = models.ImageField(blank=True, null=True, upload_to='adverts_images/', default='defaults/default-thumbnail.jpg')
-    address = models.TextField(blank=False, null=False) # required
+    address = models.TextField(blank=True) # required
     created_obj = models.DateTimeField(auto_now_add=True, editable=False) # we will set
-    country_made_by = models.ForeignKey('Country',on_delete=models.CASCADE,null=True,blank=True)
+    country_made_by = models.ForeignKey('Country',on_delete=models.CASCADE,null=True)
     class Advertstatus(models.TextChoices):
         New = 'نو', 'نو'
         Worked = 'کارکرده', 'کارکرده'
@@ -68,7 +68,7 @@ class City(models.Model):
 class Category(MPTTModel):
     name = models.CharField(max_length=90)
     parent = TreeForeignKey('self', on_delete=models.CASCADE, blank=True, null=True, related_name='children')
-
+    
 
 
     class MPTTMeta:
