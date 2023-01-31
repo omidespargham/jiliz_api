@@ -32,23 +32,28 @@ class KhadamatiSubCategorysView(APIView):
 
 
 class MakeAdvert(APIView):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def post(self, request):
         serializer = MakeAdvertSerializer(data=request.data)
 
         if serializer.is_valid():
             valided = serializer.validated_data
-            valided["user"] = request.user
+            # valided["user"] = request.user
             # TODO 
             # make the user and pass the phone_number to the advert data !
-            valided["phone_number"] = request.user.phone_number
+            # valided["phone_number"] = request.user.phone_number
             serializer.create(valided)
             return Response({'ok':'make it as avatar ;)'})
 
         return Response(data=serializer.errors)
 
-
+class GoodCategorysView(APIView):
+    def get(self,request):
+        categorys = Category.objects.filter(parent__isnull=True)
+        srz_data = CategorySerializer(instance=categorys,many=True)
+        return Response(data=srz_data.data)
+    
 
 # TODO
 # make the user and pass the phone_number to the advert data !
