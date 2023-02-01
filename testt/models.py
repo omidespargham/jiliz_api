@@ -13,5 +13,5 @@ class student(models.Model):
         return f"{self.name}"
 
 class One(models.Model):
-    name = models.CharField(max_length=255,null=True,blank=True)
+    name = models.CharField(max_length=255,null=True)
     teacherr = models.ForeignKey(teacher,on_delete=models.CASCADE,null=True)

@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.generics import CreateAPIView,GenericAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from .models import Category
@@ -31,22 +32,40 @@ class KhadamatiSubCategorysView(APIView):
 
 
 
-class MakeAdvert(APIView):
+class MakeAdvert(GenericAPIView,APIView):
     # permission_classes = [IsAuthenticated]
-
+    serializer_class = MakeAdvertSerializer
     def post(self, request):
         serializer = MakeAdvertSerializer(data=request.data)
 
         if serializer.is_valid():
             valided = serializer.validated_data
             # valided["user"] = request.user
-            # TODO 
+            # TODO
             # make the user and pass the phone_number to the advert data !
             # valided["phone_number"] = request.user.phone_number
             serializer.create(valided)
             return Response({'ok':'make it as avatar ;)'})
 
         return Response(data=serializer.errors)
+
+class MakeAdvert2(CreateAPIView):
+    serializer_class = MakeAdvertSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = MakeAdvertSerializer(data=request.data)
+
+        if serializer.is_valid():
+            valided = serializer.validated_data
+            # valided["user"] = request.user
+            # TODO
+            # make the user and pass the phone_number to the advert data !
+            # valided["phone_number"] = request.user.phone_number
+            serializer.create(valided)
+            return Response({'ok':'make it as avatar ;)'})
+
+        return Response(data=serializer.errors)
+        # return super().create(request, *args, **kwargs)
 
 class GoodCategorysView(APIView):
     def get(self,request):
