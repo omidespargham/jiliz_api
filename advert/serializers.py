@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Advert, Category,Country
+from .models import Advert, Category,Country,City,Brand
 
 # this is serializer for make advert !
 
@@ -34,3 +34,12 @@ class CountrySerializer(serializers.ModelSerializer):
         model= Country
         fields = "__all__"
 
+class CitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model= City
+        fields = "__all__"
+
+class BrandSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= Brand
+        fields = "__all__"
