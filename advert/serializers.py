@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Advert, Category
+from .models import Advert, Category,Country
 
 # this is serializer for make advert !
 
@@ -27,3 +27,10 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = ("id","name", "parent")
+
+
+class CountrySerializer(serializers.ModelSerializer):
+    class Meta:
+        model= Country
+        fields = "__all__"
+

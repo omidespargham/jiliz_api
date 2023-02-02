@@ -5,10 +5,11 @@ from rest_framework.views import APIView
 from rest_framework.generics import CreateAPIView,GenericAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
-from .models import Category
+from .models import Category,Country
 from .serializers import (
     MakeAdvertSerializer,
-    CategorySerializer
+    CategorySerializer,
+    CountrySerializer
 )
 # in view baraye return subcategory haye yek category ast(garm,srd,...).
 class CategoryChildsView(APIView):
@@ -72,7 +73,13 @@ class GoodCategorysView(APIView):
         categorys = Category.objects.filter(parent__isnull=True)
         srz_data = CategorySerializer(instance=categorys,many=True)
         return Response(data=srz_data.data)
-    
+
+class CountryMakeByView(APIView):
+    def get(self,request):
+        countrys = Country.objects.all()
+        country_srz = CountrySerializer(instance=countrys,many=True)
+        return Response(data=country_srz.data)
+
 
 # TODO
 # make the user and pass the phone_number to the advert data !
