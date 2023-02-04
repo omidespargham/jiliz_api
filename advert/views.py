@@ -35,7 +35,7 @@ class KhadamatiSubCategorysView(APIView):
 
 
 
-class MakeAdvert(GenericAPIView,APIView):
+class MakeAdvert(APIView):
     # permission_classes = [IsAuthenticated]
     serializer_class = MakeAdvertSerializer
     def post(self, request):

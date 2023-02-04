@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'mptt',
     'rest_framework_simplejwt',
-
+    'drf_spectacular',
     'drf_yasg',
 ]
 
@@ -159,9 +159,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # CORS_ORIGIN_ALLOW_ALL = False
 
-# REST_FRAMEWORK = {
-#     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema'
-# }
+
 
 
 CORS_ALLOWED_ORIGINS = [
@@ -188,4 +186,15 @@ CACHES = {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
     }
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Jiliz Api (Be Avatar)',
+    'DESCRIPTION': 'you can use this ApiDoc and develop the project !',
+    'VERSION': '1.0.0',
+
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema'
 }
