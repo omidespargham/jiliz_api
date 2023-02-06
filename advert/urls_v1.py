@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 
-app_name = 'Advertsv1'
+app_name = 'advert_v1'
 
 urlpatterns = [
     path('make-advert/', views.MakeAdvert.as_view(), name='make_advert'),
