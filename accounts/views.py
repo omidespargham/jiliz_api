@@ -8,6 +8,10 @@ from random import randint
 from django.core.cache import cache
 
 class LoginView(APIView):
+    """
+    this endpoint is for pass users phone_number and backend will send 
+    code to that phone if the phone has valid structure !
+    """
     def post(self, request):
         srz_data = UserSerialzier(data=request.data)
         if srz_data.is_valid(): # shouldnt check the phone is unique
@@ -22,6 +26,11 @@ class LoginView(APIView):
         return Response(data=srz_data.errors)
 
 class UserVerifyView(APIView):
+    """
+    in this endpoint user should pass code ,that backend sent to users phone number
+    if the code was correct,
+    user is authenticated and it will send token for the user.
+    """
     def post(self, request):
         srz_data = UserVerifySerializer(data=request.data)
         if srz_data.is_valid():
