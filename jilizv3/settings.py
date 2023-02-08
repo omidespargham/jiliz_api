@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'advert.apps.AdvertConfig',
     'blogs.apps.BlogsConfig',
     'accounts.apps.AccountsConfig',
-    # 'users.apps.UsersConfig',
+    'search.apps.SearchConfig',
     'testt.apps.TesttConfig',
     "install_repair.apps.InstallRepairConfig",
     "setup_design.apps.SetupDesignConfig",
