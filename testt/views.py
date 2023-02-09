@@ -4,7 +4,8 @@ from .models import student,One
 from rest_framework.response import Response
 from .serializer import studentserializer
 from .serializers import OneSerializer
-
+from rest_framework.generics import CreateAPIView
+from rest_framework.mixins import CreateModelMixin
 
 
 class returnthestudentview(APIView):
@@ -22,6 +23,15 @@ class returnthestudentview(APIView):
             return Response(data=stu_data.data)
         return Response(data=stu_data.errors)
 
+
+class CreateOneView(CreateAPIView):
+    serializer_class = OneSerializer
+
+    def post(self, request, *args, **kwargs):
+        return super().post(request, *args, **kwargs)
+
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
 
 class OneView(APIView):
     def get(self,request):
