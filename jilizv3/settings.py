@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     'mptt',
     'rest_framework_simplejwt',
     'drf_spectacular',
-    'drf_yasg',
+    # 'drf_yasg',
 ]
 
 MIDDLEWARE = [
