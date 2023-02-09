@@ -54,6 +54,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'mptt',
     'rest_framework_simplejwt',
+    'drf_spectacular',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
@@ -134,7 +136,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+
+STATIC_ROOT = BASE_DIR / 'staticroot'
+STATIC_URL = '/static/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -154,9 +159,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # CORS_ORIGIN_ALLOW_ALL = False
 
-# REST_FRAMEWORK = {
-#     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema'
-# }
+
 
 
 CORS_ALLOWED_ORIGINS = [
@@ -183,4 +186,15 @@ CACHES = {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
     }
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Jiliz Api (Be Avatar)',
+    'DESCRIPTION': 'you can use this ApiDoc and develop the project !',
+    'VERSION': '1.0.0',
+
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema'
 }
