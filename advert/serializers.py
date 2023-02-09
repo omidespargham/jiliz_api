@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Advert, Category,Country,City,Brand
-
+from django.utils.translation import gettext_lazy as _
 # this is serializer for make advert !
 
 
@@ -12,6 +12,9 @@ class MakeAdvertSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             "city": {"required": True},
             "agreement_price": {"required": True},
+            "error_messages": {
+                "status_type": {"invalid": _("باید نو یا کارکرده بفرستید")}
+            }
             # "image0" : {"required": True},
         }
 
