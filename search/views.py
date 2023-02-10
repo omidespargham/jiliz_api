@@ -9,11 +9,11 @@ class GoodsSearchView(APIView):
     def get(self,request):
         srz_advert = AdvertSearchSerializer(data=request.data)
         if srz_advert.is_valid():
-            search = srz_advert.validated_data["search"]
-            del srz_advert.validated_data["search"]
-            adverts = Advert.objects.filter(Q(title__contains=search) | Q(description__contains=search),**srz_advert.validated_data)
+            query = srz_advert.make_Q_statments_for_model_querys(srz_advert.validated_data)
+            adverts = Advert.objects.filter(query["search"],query["category"],query["city"],
+                                            query["country_made_by"],query["brand"],
+                                            query["status_type"])
             adverts_json = HomeGetAdvertSerialiser(instance=adverts,many=True)
-            print(adverts)
             return Response(adverts_json.data)
         return Response(srz_advert.errors)
         
