@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.generics import CreateAPIView,GenericAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
-from .models import Category,Country,City,Brand
+from .models import Category,Country,City,Brand,Advert
 from .serializers import (
     MakeAdvertSerializer,
     CategorySerializer,
@@ -110,5 +110,11 @@ class BrandView(APIView):
         brands = Brand.objects.all()
         brands_srz = BrandSerializer(instance=brands,many=True)
         return Response(data=brands_srz.data)
+    
+
+class AdvertListView(APIView):
+    def get(self,request):
+        Advert.objects.filter()
+# class AdvertDetailView(APIView)
 # TODO
 # make the user and pass the phone_number to the advert data !
