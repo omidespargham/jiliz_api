@@ -12,11 +12,14 @@ class BrandAdmin(admin.ModelAdmin):
 class CountryAdmin(admin.ModelAdmin):
     list_display = ("name","id")
 
+class AdvertAdmin(admin.ModelAdmin):
+    list_display = ("title","id")
+
 admin.site.register(models.Category, MPTTModelAdmin)
 admin.site.register(models.City,CityAdmin)
 admin.site.register(models.Country,CountryAdmin)
 admin.site.register(models.Brand,BrandAdmin)
-admin.site.register(models.Advert)
+admin.site.register(models.Advert,AdvertAdmin)
 
 
 

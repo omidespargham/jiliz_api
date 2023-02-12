@@ -22,7 +22,7 @@ class Advert(models.Model):
     title = models.CharField(max_length=50) # required
     description = models.TextField() # required
     price = models.CharField(max_length=100,blank=True)
-    agreement_price = models.BooleanField() # tavafoghi(True) gheymat(False) # required
+    # agreement_price = models.BooleanField() # tavafoghi(True) gheymat(False) # required
     phone_number = models.CharField(max_length=12) # we will set
     city = models.ForeignKey('City', on_delete=models.SET_NULL,null=True) # required
     # expired

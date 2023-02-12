@@ -11,7 +11,7 @@ class TestMakeAdvert(TestCase):
 
     def test_can_make_advert(self):
         try:
-            a = Advert.objects.create(title="title",description="description",agreement_price=True,phone_number="0912")
+            a = Advert.objects.create(title="title",description="description",phone_number="0912")
             a.categorys.set(Category.objects.all())
             self.assertTrue(True)
         except:
