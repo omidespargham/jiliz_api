@@ -11,7 +11,8 @@ from .serializers import (
     CategorySerializer,
     CountrySerializer,
     CitySerializer,
-    BrandSerializer
+    BrandSerializer,
+    AdvertDetailSerializer
 )
 # in view baraye return subcategory haye yek category ast(garm,srd,...).
 class CategoryChildsView(APIView):
@@ -112,9 +113,18 @@ class BrandView(APIView):
         return Response(data=brands_srz.data)
     
 
-class AdvertListView(APIView):
-    def get(self,request):
-        Advert.objects.filter()
+# class AdvertListView(APIView):
+#     def get(self,request):
+#         Advert.objects.filter()
+
+class AdvertDetailView(APIView):
+    def get(self,request,advert_id):
+        try:
+            advert = Advert.objects.get(id=advert_id)
+            advert_srz = AdvertDetailSerializer(instance=advert)
+            return Response(data=advert_srz.data)
+        except Advert.DoesNotExist:
+            return Response(data={"error":"advert id does not exist !"})
 # class AdvertDetailView(APIView)
 # TODO
 # make the user and pass the phone_number to the advert data !

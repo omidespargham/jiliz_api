@@ -26,6 +26,10 @@ class MakeAdvertSerializer(serializers.ModelSerializer):
         advert.categorys.set(categorys_id_to_set)
         return advert
 
+class AdvertDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Advert
+        fields= "__all__"
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
