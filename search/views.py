@@ -18,10 +18,12 @@ class GoodsSearchView(APIView):
                 adverts = Advert.objects.filter(query["search"], query["category"], query["city"],
                                                 query["country_made_by"], query["brand"],
                                                 query["status_type"]).order_by("-created_obj")[range_data - 10:range_data]
-                adverts_json = HomeGetAdvertSerialiser(instance=adverts, many=True)
+                adverts_json = HomeGetAdvertSerialiser(instance=adverts, many=True ,context={'host': request.META['HTTP_HOST']})
                 return Response(adverts_json.data)
             return Response(srz_advert.errors)
         return Response({"error":"number of range should be >=1"})
+
+# context={'host': request.META['HTTP_HOST']}
 
 # from functools import reduce
 # topics = reduce(lambda qs, pk: qs.filter(categorys=pk), [4,8], Advert.objects.all())
