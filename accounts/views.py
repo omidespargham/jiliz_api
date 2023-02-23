@@ -12,6 +12,18 @@ class LoginView(APIView):
     this endpoint is for pass users phone_number and backend will send 
     code to that phone if the phone has valid structure !
     """
+    # def post(self, request):
+    #     srz_data = UserSerialzier(data=request.data)
+    #     if srz_data.is_valid(): # shouldnt check the phone is unique
+    #         the_code = randint(1, 9)
+    #         phone= srz_data.validated_data["phone_number"]
+    #         RGScode.objects.create(
+    #             phone_number=phone, code=the_code)
+    #         cache.set(the_code,phone)
+    #         print(the_code)
+    #         # if the session didnt work in DRF get the phone again in user verify view !
+    #         return Response(data=srz_data.data)
+    #     return Response(data=srz_data.errors)
     def post(self, request):
         srz_data = UserSerialzier(data=request.data)
         if srz_data.is_valid(): # shouldnt check the phone is unique
@@ -19,10 +31,12 @@ class LoginView(APIView):
             phone= srz_data.validated_data["phone_number"]
             RGScode.objects.create(
                 phone_number=phone, code=the_code)
-            cache.set(the_code,phone)
+            # cache.set(the_code,phone)
             print(the_code)
             # if the session didnt work in DRF get the phone again in user verify view !
-            return Response(data=srz_data.data)
+            data = srz_data.data
+            data["code"] = the_code
+            return Response(data=data)
         return Response(data=srz_data.errors)
 
 class UserVerifyView(APIView):

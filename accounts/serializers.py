@@ -30,13 +30,28 @@ class UserVerifySerializer(serializers.Serializer):
     code = serializers.IntegerField()
 
     def validate_code(self,code):
-        phone = cache.get(code,None)
+        # phone = cache.get(code,None)
+        
         if len(str(code)) != 1:
             raise serializers.ValidationError("کد نامعتبر است.")
-        elif not phone:
+        try:
+            rgs_obj = RGScode.objects.get(code=code)
+            phone = rgs_obj.phone_number
+            rgs_obj.delete()
+        except RGScode.DoesNotExist:
             raise serializers.ValidationError("کد وجود ندارد و یا منقضی شده")
-        cache.delete_pattern(code)
+        # cache.delete_pattern(code)
         return phone
+    
+    # def validate_code(self,code):
+    #     phone = cache.get(code,None)
+    #     if len(str(code)) != 1:
+    #         raise serializers.ValidationError("کد نامعتبر است.")
+    #     elif not phone:
+    #         raise serializers.ValidationError("کد وجود ندارد و یا منقضی شده")
+    #     cache.delete_pattern(code)
+    #     return phone
+
     
         # try:
         #     the_code = RGScode.objects.get(code=code)
