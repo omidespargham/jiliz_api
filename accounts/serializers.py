@@ -32,7 +32,7 @@ class UserVerifySerializer(serializers.Serializer):
     def validate_code(self,code):
         # phone = cache.get(code,None)
         
-        if len(str(code)) != 1:
+        if len(str(code)) != 5:
             raise serializers.ValidationError("کد نامعتبر است.")
         try:
             rgs_obj = RGScode.objects.get(code=code)

@@ -27,11 +27,11 @@ class LoginView(APIView):
     def post(self, request):
         srz_data = UserSerialzier(data=request.data)
         if srz_data.is_valid(): # shouldnt check the phone is unique
-            the_code = randint(1, 9)
+            the_code = randint(10000, 99999)
             phone= srz_data.validated_data["phone_number"]
             RGScode.objects.create(
                 phone_number=phone, code=the_code)
-            # cache.set(the_code,phone)
+            # cache.set(the_code,phone) # please user expire date for the key in redis
             print(the_code)
             # if the session didnt work in DRF get the phone again in user verify view !
             data = srz_data.data
