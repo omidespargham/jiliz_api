@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
+from rest_framework.generics import GenericAPIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.response import Response
 from .serializers import UserSerialzier,UserVerifySerializer
@@ -7,11 +8,13 @@ from .models import User,RGScode
 from random import randint
 from django.core.cache import cache
 
-class LoginView(APIView):
+
+class LoginView(GenericAPIView,APIView):
     """
     this endpoint is for pass users phone_number and backend will send 
     code to that phone if the phone has valid structure !
     """
+    serializer_class = UserSerialzier
     # def post(self, request):
     #     srz_data = UserSerialzier(data=request.data)
     #     if srz_data.is_valid(): # shouldnt check the phone is unique
@@ -39,12 +42,14 @@ class LoginView(APIView):
             return Response(data=data)
         return Response(data=srz_data.errors)
 
-class UserVerifyView(APIView):
+class UserVerifyView(GenericAPIView,APIView):
     """
     in this endpoint user should pass code ,that backend sent to users phone number
     if the code was correct,
     user is authenticated and it will send token for the user.
     """
+
+    serializer_class = UserVerifySerializer
     def post(self, request):
         srz_data = UserVerifySerializer(data=request.data)
         if srz_data.is_valid():

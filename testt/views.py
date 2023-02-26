@@ -6,14 +6,15 @@ from .serializer import studentserializer
 from .serializers import OneSerializer
 from rest_framework.generics import CreateAPIView
 from rest_framework.mixins import CreateModelMixin
-
+from drf_spectacular.utils import extend_schema
 
 class returnthestudentview(APIView):
+    @extend_schema(exclude=True)
     def get(self,request):
         students = student.objects.all()
         students_srz = studentserializer(instance=students,many=True)
         return Response(data=students_srz.data)
-
+    @extend_schema(exclude=True)
     def post(self,request):
         stu_data = studentserializer(data=request.data)
         if stu_data.is_valid():
@@ -26,7 +27,7 @@ class returnthestudentview(APIView):
 
 class CreateOneView(CreateAPIView):
     serializer_class = OneSerializer
-
+    @extend_schema(exclude=True)
     def post(self, request, *args, **kwargs):
         return super().post(request, *args, **kwargs)
 
@@ -34,10 +35,12 @@ class CreateOneView(CreateAPIView):
         return super().create(request, *args, **kwargs)
 
 class OneView(APIView):
+    @extend_schema(exclude=True)
     def get(self,request):
         ones = One.objects.all()
         ones_srz = OneSerializer(instance=ones,many=True)
         return Response(data=ones_srz.data)
+    @extend_schema(exclude=True)
     def post(self,request):
         one_srz = OneSerializer(data=request.data)
         if one_srz.is_valid():

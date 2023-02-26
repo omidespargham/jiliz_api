@@ -15,11 +15,12 @@ from .serializers import (
     AdvertDetailSerializer
 )
 # in view baraye return subcategory haye yek category ast(garm,srd,...).
-class CategoryChildsView(APIView):
+class CategoryChildsView(GenericAPIView,APIView):
     """
     this endpoint is for return subcategorys of one category
     
     """
+    serializer_class = CategorySerializer
     def get(self, request, category_id):
         category = get_object_or_404(Category, id=category_id)
         srz_data = CategorySerializer(instance=category.get_children(), many=True)
@@ -85,28 +86,41 @@ class MakeAdvert2(CreateAPIView):
         # return super().create(request, *args, **kwargs)
 
 
-class GoodCategorysView(APIView):
+class GoodCategorysView(GenericAPIView,APIView):
     """
     return categorys that has category_type of good_category
     """
+    serializer_class = CategorySerializer
     def get(self,request):
         categorys = Category.objects.filter(parent__isnull=True,category_type="good_category")
         srz_data = CategorySerializer(instance=categorys,many=True)
         return Response(data=srz_data.data)
     
-class CountrysMakeByView(APIView):
+class CountrysMakeByView(GenericAPIView,APIView):
+    """
+    this endpoint return all the countrys that maked the product
+    """
+    serializer_class = CountrySerializer
     def get(self,request):
         countrys = Country.objects.all()
         country_srz = CountrySerializer(instance=countrys,many=True)
         return Response(data=country_srz.data)
 
-class CityView(APIView):
+class CityView(GenericAPIView,APIView):
+    """
+    this endpoint returns all the Citys
+    """
+    serializer_class = CitySerializer
     def get(self,request):
         citys = City.objects.all()
         citys_srz = CitySerializer(instance=citys,many=True)
         return Response(data=citys_srz.data)
 
-class BrandView(APIView):
+class BrandView(GenericAPIView,APIView):
+    """
+    this endpoint return all the brands
+    """
+    serializer_class = BrandSerializer
     def get(self,request):
         brands = Brand.objects.all()
         brands_srz = BrandSerializer(instance=brands,many=True)
@@ -117,7 +131,11 @@ class BrandView(APIView):
 #     def get(self,request):
 #         Advert.objects.filter()
 
-class AdvertDetailView(APIView):
+class AdvertDetailView(GenericAPIView,APIView):
+    """
+    this endpoint return information of one advert
+    """
+    serializer_class = AdvertDetailSerializer
     def get(self,request,advert_id):
         try:
             advert = Advert.objects.get(id=advert_id)

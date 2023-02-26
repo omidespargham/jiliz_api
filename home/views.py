@@ -7,14 +7,15 @@ from advert.models import (
     Advert
 )
 from django.core.cache import cache
-
+from rest_framework.generics import GenericAPIView
 
 # this is for 4 adverts with category view
-class HomePageDataView(APIView):
+class HomePageDataView(GenericAPIView,APIView):
     """
     this api return parent categorys with their adverts
     for home page.
     """
+    serializer_class = HomeCategorySerializer
     def get(self, request):
         categorys = Category.objects.filter(parent__isnull=True)
         category_srz = HomeCategorySerializer(instance=categorys,many=True, context={'host': request.META['HTTP_HOST']})
@@ -22,7 +23,7 @@ class HomePageDataView(APIView):
 
 
 # return adverts with category 5
-class HomePageCategoryDataView(APIView):
+class HomePageCategoryDataView(GenericAPIView,APIView):
     """
     this api return adverts
     you will pass a number and category_id 
@@ -30,6 +31,7 @@ class HomePageCategoryDataView(APIView):
     the number is how many adverts should return from -5 of that
 
     """
+    serializer_class = HomeGetAdvertSerialiser
     def get(self, request, num_post, category_id):
         visble = 5
         upper = num_post

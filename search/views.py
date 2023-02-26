@@ -5,9 +5,11 @@ from rest_framework.response import Response
 from .serializers import AdvertSearchSerializer
 from django.db.models import Q
 from home.serializers import HomeGetAdvertSerialiser
+from rest_framework.generics import GenericAPIView
 
-
-class GoodsSearchView(APIView):
+class GoodsSearchView(GenericAPIView,APIView):
+    
+    serializer_class = AdvertSearchSerializer
     def get(self, request, range_number=1):
         if range_number > 0:
             range_data = range_number * 10
